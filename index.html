@@ -11,10 +11,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
 
     <script src="CamFetcher.js"></script>
     <script src="CNN.js"></script>
-    <script src="dataset.js"></script>
 
 </head>
 <body>
@@ -114,7 +118,21 @@
    
 
     <script type="text/javascript">
-  
+         
+    var firebaseConfig = {
+    apiKey: "AIzaSyBKOpv59iwlHXJFijXoaHfouBKLQt_QHJA",
+    authDomain: "sonic-quiz-8af26.firebaseapp.com",
+    databaseURL: "https://sonic-quiz-8af26.firebaseio.com",
+    projectId: "sonic-quiz-8af26",
+    storageBucket: "sonic-quiz-8af26.appspot.com",
+    messagingSenderId: "255729415959",
+    appId: "1:255729415959:web:e9341b6e44ac0d63302952",
+    measurementId: "G-4169G2B6SV"
+  };
+  firebase.initializeApp(firebaseConfig);
+  var ref = firebase.database().ref();
+
+
         //const URL='https://teachablemachine.withgoogle.com/models/C4-gcUP0/';
         const URL='https://teachablemachine.withgoogle.com/models/wlGPorLq/';
 
@@ -137,7 +155,6 @@
       
       
           const label = results[0].label;
-          console.log(label);
 
           getData(label);
       
@@ -145,18 +162,15 @@
 
         function getData(label)
         {
-           if(label=='piyush')
+         ref.child("names").child(label).on("value",
+          function(snapshot)
+          {
+            loadData(snapshot.val());
+          }, 
+          function (error)
            {
-              loadData(piyush);
-           }
-           else if(label=='shivendra')
-           {
-              loadData(shivendra);
-           }
-           else
-           {
-              loadData(none);
-           }
+            console.log("Error: " + error.code);
+         });
         }
         function loadData(obj)
         {
@@ -169,6 +183,9 @@
 
 
         }
+
+
+
       </script>
       
 </body>
