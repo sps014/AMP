@@ -133,8 +133,8 @@
   var ref = firebase.database().ref();
 
 
-        //const URL='https://teachablemachine.withgoogle.com/models/C4-gcUP0/';
-        const URL='https://teachablemachine.withgoogle.com/models/wlGPorLq/';
+        const URL='https://teachablemachine.withgoogle.com/models/Njk7jZzD/';
+        //const URL='https://teachablemachine.withgoogle.com/models/wlGPorLq/';
 
         const fet=new CamFetcher(this.innerWidth/2-20,this.innerHeight-140,'vidContainer',getImageFrame);
 
@@ -156,16 +156,14 @@
       
           const label = results[0].label;
 
-          getData(label);
+          ReadStation(label);
       
         }
 
         function ReadStation(label)
         {
-           if(label=="none")
            {
-              console.log("none");
-              return;
+              console.log(label);
            }
          ref.child("names").child(label).child("lastIn").set((new Date().getTime()).toString());
          ref.child("names").child(label).once("value",
