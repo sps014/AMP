@@ -186,7 +186,7 @@
          ref.child("names").child(label).once("value",
           function(snapshot)
           {
-            loadData(snapshot.val());
+            loadDataRead(snapshot.val());
           }, 
           function (error)
            {
@@ -214,6 +214,19 @@
            document.getElementById("dateTime").innerHTML=    new Date().toLocaleString();
            document.getElementById("fromTo").innerHTML=obj.instn+" ➡ "+obj.outstn;
            document.getElementById("cost").innerHTML=obj.cost;
+           document.getElementById("gateID").innerHTML=obj.gateID;
+           document.getElementById("avalBal").innerHTML=obj.avalBal+"₹";
+
+
+        }
+
+        function loadDataRead(obj)
+        {
+           document.getElementById("tokenId").innerHTML=obj.uid;
+           document.getElementById("nameM").innerHTML=obj.name;
+           document.getElementById("dateTime").innerHTML=    new Date().toLocaleString();
+           document.getElementById("fromTo").innerHTML=obj.instn+" ➡ "+obj.outstn;
+           document.getElementById("cost").innerHTML="N/A";
            document.getElementById("gateID").innerHTML=obj.gateID;
            document.getElementById("avalBal").innerHTML=obj.avalBal+"₹";
 
