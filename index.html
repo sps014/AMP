@@ -156,12 +156,17 @@
       
           const label = results[0].label;
 
-          getData(label);
+          ReadStation(label);
       
         }
 
         function ReadStation(label)
         {
+           if(label=="none")
+           {
+              console.log("none");
+              return;
+           }
          ref.child("names").child(label).child("lastIn").set((new Date().getTime()).toString());
         }
 
