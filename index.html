@@ -114,7 +114,10 @@
                                        <div class="mdl-snackbar__text"></div>
                                        <button class="mdl-snackbar__action" type="button"></button>
                                      </div>
-
+                                     <div id="demo-toast-example2" class="mdl-js-snackbar mdl-snackbar">
+                                          <div class="mdl-snackbar__text"></div>
+                                          <button class="mdl-snackbar__action" type="button"></button>
+                                        </div>
 
                                </div>
 
@@ -146,6 +149,8 @@
   var ref = firebase.database().ref();
 
     var snackbarContainer = document.querySelector('#demo-toast-example');
+    var snackbarContainer2 = document.querySelector('#demo-toast-example2');
+
 
 
         const URL='https://teachablemachine.withgoogle.com/models/Njk7jZzD/';
@@ -223,6 +228,7 @@
            return parseInt(str);
         }
         let startTime=0;
+        let timeDur=6000;
         function deduct(obj,label)
         {
            if(parseInt(obj.avalBal)>parseInt(obj.cost) && new Date().getTime()-startTime>=10000)
@@ -233,11 +239,23 @@
             labelz.child("lastIn").set("");
             startTime=new Date().getTime();
 
+            while((new Date().getTime()-disPTimer)<=timeDur)
+            {
+               snackbarContainer2.style.backgroundColor="green";
+            }
+            snackbarContainer2.style.backgroundColor="green";
+
+            console.log(new Date().getTime()-disPTimer);
+            showSnack2('Paid Successfully.-> '+obj.cost);
+            disPTimer=new Date().getTime();
+
            }
            else
            {
-              //error no balance 
-           }
+                     snackbarContainer.style.backgroundColor="red";
+                     showSnack('Available Balance is low.');
+                     disPTimer=new Date().getTime();     
+            }
         }
         function BalDeduction(obj,label)
         {
@@ -252,7 +270,7 @@
               let lastOut=getInt(obj.lastOut);
               if(curTime-lastOut>=1000*60)
               {
-               if(new Date().getTime()-disPTimer>=2000)
+               if(new Date().getTime()-disPTimer>=timeDur)
                {
                   snackbarContainer.style.backgroundColor="red";
                   showSnack('you are not allowed since you havent verified from entry gate meet autorities.');
@@ -268,7 +286,7 @@
               let outTime=getInt(new Date().getTime());
               if(obj.lastIn=="")
               {
-               if(new Date().getTime()-disPTimer>=2000)
+               if(new Date().getTime()-disPTimer>=timeDur)
                {
                      snackbarContainer.style.backgroundColor="red";
                      showSnack('meet autorities.');
@@ -283,7 +301,7 @@
               }
               else
               {
-                 if(new Date().getTime()-disPTimer>=2000)
+                 if(new Date().getTime()-disPTimer>=timeDur)
                  {
                   snackbarContainer.style.backgroundColor="green";
                   showSnack('You can go out without payment.');
@@ -299,16 +317,30 @@
          {
                var data = {
                   message:msg,
-                  timeout: 2000,
+                  timeout: timeDur,
                   actionText: 'Message'
                };
-               if(new Date().getTime()-disPTimer<=2000)
+               if(new Date().getTime()-disPTimer<=timeDur)
                {
                   return;
                }
                if(snackbarContainer.className!="mdl-js-snackbar mdl-snackbar mdl-snackbar--active")
                {
                      snackbarContainer.MaterialSnackbar.showSnackbar(data);
+               }
+         }
+         function showSnack2(msg)
+         {
+               var data = {
+                  message:msg,
+                  timeout: timeDur,
+                  actionText: 'Message'
+               };
+
+               if(snackbarContainer2.className!="mdl-js-snackbar mdl-snackbar mdl-snackbar--active")
+               {
+                  snackbarContainer2.style.backgroundColor="green";
+                     snackbarContainer2.MaterialSnackbar.showSnackbar(data);
                }
          }
 
