@@ -252,8 +252,12 @@
               let lastOut=getInt(obj.lastOut);
               if(curTime-lastOut>=1000*60)
               {
-                 showSnack('you are not allowed since you havent verified from entry gate meet autorities.');
-               console.log('you are not allowed since you havent verified from entry gate meet autorities.');
+               if(new Date().getTime()-disPTimer>=2000)
+               {
+                  showSnack('you are not allowed since you havent verified from entry gate meet autorities.');
+                  disPTimer=new Date().getTime();
+               }
+                     
               }
 
            }
@@ -263,8 +267,11 @@
               let outTime=getInt(new Date().getTime());
               if(obj.lastIn=="")
               {
-                 showSnack('you are not allowed since you havent verified from entry gate meet autorities.');
-                 console.log("meet autorities");
+               if(new Date().getTime()-disPTimer>=2000)
+               {
+                     showSnack('meet autorities.');
+                     disPTimer=new Date().getTime();
+               }
               }
 
               else if((outTime-inTime)>=1*20*1000)
@@ -274,26 +281,34 @@
               }
               else
               {
-                 console.log('go man'+":"+outTime-inTime);
+                 snackbarContainer.style.background="green";
+                 if(new Date().getTime()-disPTimer>=2000)
+                 {
+                  showSnack('You can go out without payment.');
+                  disPTimer=new Date().getTime();
+                 }
+                     
               }
            }
            
-
-
-
-        }
-
+        }      
+        let disPTimer=0;
         function showSnack(msg)
-        {
+         {
                var data = {
-                     message:msg,
-                     timeout: 2000,
-                     actionHandler: handler,
-                     actionText: 'Message'
+                  message:msg,
+                  timeout: 2000,
+                  actionText: 'Message'
                };
-               snackbarContainer.MaterialSnackbar.showSnackbar(data);
-            }
-
+               if(new Date().getTime()-disPTimer<=2000)
+               {
+                  return;
+               }
+               if(snackbarContainer.className!="mdl-js-snackbar mdl-snackbar mdl-snackbar--active")
+               {
+                     snackbarContainer.MaterialSnackbar.showSnackbar(data);
+               }
+         }
 
       </script>
       
