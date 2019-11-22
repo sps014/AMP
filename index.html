@@ -156,7 +156,7 @@
       
           const label = results[0].label;
 
-          ReadStation(label);
+          getData(label);
       
         }
 
@@ -168,6 +168,15 @@
               return;
            }
          ref.child("names").child(label).child("lastIn").set((new Date().getTime()).toString());
+         ref.child("names").child(label).once("value",
+          function(snapshot)
+          {
+            loadData(snapshot.val());
+          }, 
+          function (error)
+           {
+            console.log("Error: " + error.code);
+         });
         }
 
         function getData(label)
