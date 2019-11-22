@@ -115,7 +115,7 @@
 
     <script type="text/javascript">
   
-        const URL='https://teachablemachine.withgoogle.com/models/UAnO3ivL/';
+        const URL='https://teachablemachine.withgoogle.com/models/C4-gcUP0/';
 
         const fet=new CamFetcher(this.innerWidth/2-20,this.innerHeight-140,'vidContainer',getImageFrame);
 
@@ -144,9 +144,13 @@
 
         function getData(label)
         {
-           if(label=='someone')
+           if(label=='piyush')
            {
               loadData(piyush);
+           }
+           else if(label=='shivendra')
+           {
+              loadData(shivendra);
            }
            else
            {
