@@ -127,7 +127,15 @@
 
 
                    <section class = "mdl-layout__tab-panel" id = "scroll-tab-3">
-                      <div class = "page-content">Tab 3 Contents</div>
+                      <div class = "page-content">
+                      <div style="position: absolute;top:40px;left:40px">
+                           <label class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" 
+                           for = "checkbox2">
+                           <input type = "checkbox" id = "checkbox2" class = "mdl-checkbox__input">
+                           <span class = "mdl-checkbox__label">Input Gate</span>
+                        </label>
+                      </div>
+                      </div>
                    </section>
                 </main>
              </div>
@@ -150,7 +158,7 @@
 
     var snackbarContainer = document.querySelector('#demo-toast-example');
     var snackbarContainer2 = document.querySelector('#demo-toast-example2');
-
+    var inputType=document.getElementById('checkbox2');
 
 
         const URL='https://teachablemachine.withgoogle.com/models/Njk7jZzD/';
@@ -176,7 +184,10 @@
       
           const label = results[0].label;
 
+          if(!inputType.checked)
           getData(label);
+          else
+          ReadStation(label);
       
         }
 
