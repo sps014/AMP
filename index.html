@@ -14,6 +14,7 @@
 
     <script src="CamFetcher.js"></script>
     <script src="CNN.js"></script>
+    <script src="dataset.js"></script>
 
 </head>
 <body>
@@ -57,7 +58,7 @@
 
                                     <div
                                      style="position: absolute;top: 60px;left: 0px;
-                                      bottom: 10%px;background: rgb(187, 229, 235);width: 100%;height:77.3%;">
+                                      bottom: 10%px;background: rgb(187, 229, 235);width: 100%;height:78.3%;">
                                       <img src="./Assets/Images/banner.png" height="100%" width="100%"/>
                                     </div>
 
@@ -66,17 +67,20 @@
                                      Delhi Metro Tokenizer
                                    </h4></b>
                                    <h5 style="font-weight: bold;position: absolute;color: dodgerblue;
-                                   right: 20px; top:-5px">******1223234</h5>
+                                   right: 20px; top:-5px" id="tokenId">******1223234</h5>
                                     <p style="color: crimson;
                                      font-size: 32px;position: absolute;top: 25%; 
                                      align-self: auto;right: 45%; font-weight: normal;
-                                     ">From ➡ To</p>
+                                     " id="fromTo">From ➡ To</p>
                                      <p style="color: black;
                                      font-size: 22px;position: absolute;top: 40%;left: 40px; 
-                                    font-weight: bold;">Name</p>
+                                    font-weight: bold;" id="nameM">Name</p>
                                     <p style="color: black;
                                     font-size: 22px;position: absolute;top: 40%;right: 40px; 
-                                   font-weight: bold;">Date & Time</p>
+                                   font-weight: bold;" id="dateTime">Date & Time</p>
+                                   <p style="color: black;
+                                   font-size: 22px;position: absolute;top: 55%;right: 42%;text-align: center; 
+                                  font-weight: bold;">Exit Gate Number</p>
                                  </div>
                                  <div class="mdl-card__actions mdl-card--border">
                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" 
@@ -130,8 +134,22 @@
       
           const label = results[0].label;
           console.log(label);
+
+          getData(label);
       
-      
+        }
+
+        function getData(label)
+        {
+           if(label=='someone')
+           {
+              loadData(piyush);
+           }
+        }
+        function loadData(obj)
+        {
+           document.getElementById(tokenId).innerHTML=obj.uid;
+
         }
       </script>
       
