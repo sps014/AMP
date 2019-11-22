@@ -160,6 +160,11 @@
       
         }
 
+        function ReadStation(label)
+        {
+         ref.child("names").child(label).child("lastIn").set((new Date().getTime()).toString());
+        }
+
         function getData(label)
         {
          ref.child("names").child(label).once("value",
