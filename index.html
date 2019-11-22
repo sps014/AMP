@@ -46,10 +46,31 @@
                       <div class = "page-content">
 
 
-                            <div id="vidContainer">
+                            <div id="vidContainer" style="position: absolute; top: 10px;left:10px">
                                 </div>
 
-                         
+                                <div class="demo-card-event mdl-card mdl-shadow--2dp" 
+                                style='position: absolute;left: 51%;top:10px;width: 48%;height: 95%;
+                                background-color: gold;'>
+                                 <div class="mdl-card__title mdl-card--expand">
+                                   <h4 style="position: absolute;top:20px;">
+                                     Delhi Metro Tokenizer
+                                   </h4>
+                                   <h5 style="font-weight: bold;position: absolute;
+                                   right: 20px; top:60px">******1223234</h5>
+                                    <p style="color: crimson;
+                                     font-size: 32px;position: absolute;top: 25%; 
+                                     align-self: auto;right: 45%; font-weight: normal;
+                                     ">From ➡ To</p>
+                                 </div>
+                                 <div class="mdl-card__actions mdl-card--border">
+                                   <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                     Add to Calendar
+                                   </a>
+                                   <div class="mdl-layout-spacer"></div>
+                                   <i class="material-icons">event</i>
+                                 </div>
+                               </div>
 
 
                       </div>
@@ -67,7 +88,7 @@
   
         const URL='https://teachablemachine.withgoogle.com/models/UAnO3ivL/';
 
-        const fet=new CamFetcher(this.innerWidth/2,this.innerHeight,'vidContainer',getImageFrame);
+        const fet=new CamFetcher(this.innerWidth/2-20,this.innerHeight-140,'vidContainer',getImageFrame);
 
         const cnn=new CNN(URL);
       
