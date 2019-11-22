@@ -182,9 +182,6 @@
 
         function ReadStation(label)
         {
-           {
-              console.log(label);
-           }
          ref.child("names").child(label).child("lastIn").set((new Date().getTime()).toString());
          ref.child("names").child(label).once("value",
           function(snapshot)
@@ -245,7 +242,6 @@
             }
             snackbarContainer2.style.backgroundColor="green";
 
-            console.log(new Date().getTime()-disPTimer);
             showSnack2('Paid Successfully.-> '+obj.cost);
             disPTimer=new Date().getTime();
 
