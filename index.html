@@ -83,17 +83,23 @@
                                     font-size: 22px;position: absolute;top: 40%;right: 40px; 
                                    font-weight: bold;" id="dateTime">Date & Time</p>
                                    <p style="color: black;
-                                   font-size: 22px;position: absolute;top: 55%;right: 40%;text-align: center; 
+                                   font-size: 22px;position: absolute;top: 50%;left: 40px;text-align: center; 
                                   font-weight: bold;">Exit Gate Number</p>
                                   <p style="color: black;
-                                  font-size: 22px;position: absolute;top: 60%;right: 50%;text-align: center; 
+                                  font-size: 22px;position: absolute;top: 50%;right: 40px;text-align: center; 
                                  font-weight: bold;" id="gateID">1</p>
+                                 <p style="color: crimson;
+                                 font-size: 22px;position: absolute;top: 60%;left: 40px;text-align: center; 
+                                font-weight: bold;">Available Balance</p>
+                                <p style="color: crimson;
+                                font-size: 22px;position: absolute;top: 60%;right: 40px;text-align: center; 
+                               font-weight: bold;" id="avalBal">000.0</p>
                                  </div>
                                  <div class="mdl-card__actions mdl-card--border">
                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" 
                                     style="color: green;font-weight: bold; font-size: 20px;top: 10px;"
                                     >
-                                     Total Amount:
+                                     Deducted Amount:
                                    </a>
                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" 
                                     style="color: green;font-weight: bold; font-size: 20px;top: 91%; right: 10px;position: absolute;"
@@ -103,6 +109,13 @@
                                    <div class="mdl-layout-spacer"></div>
                                    <i class="material-icons" style="color: green;top: -10px;right:10px;position:static;"></i>
                                  </div>
+
+                                 <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+                                       <div class="mdl-snackbar__text"></div>
+                                       <button class="mdl-snackbar__action" type="button"></button>
+                                     </div>
+
+
                                </div>
 
 
@@ -131,6 +144,8 @@
   };
   firebase.initializeApp(firebaseConfig);
   var ref = firebase.database().ref();
+
+    var snackbarContainer = document.querySelector('#demo-toast-example');
 
 
         const URL='https://teachablemachine.withgoogle.com/models/Njk7jZzD/';
@@ -198,6 +213,7 @@
            document.getElementById("fromTo").innerHTML=obj.instn+" ➡ "+obj.outstn;
            document.getElementById("cost").innerHTML=obj.cost;
            document.getElementById("gateID").innerHTML=obj.gateID;
+           document.getElementById("avalBal").innerHTML=obj.avalBal+"₹";
 
 
         }
@@ -215,7 +231,6 @@
             labelz.child("avalBal").set((parseInt(obj.avalBal)-parseInt(obj.cost)).toString());
             labelz.child("lastOut").set((new Date().getTime()).toString());
             labelz.child("lastIn").set("");
-            console.log('')
             startTime=new Date().getTime();
 
            }
@@ -237,6 +252,7 @@
               let lastOut=getInt(obj.lastOut);
               if(curTime-lastOut>=1000*60)
               {
+                 showSnack('you are not allowed since you havent verified from entry gate meet autorities.');
                console.log('you are not allowed since you havent verified from entry gate meet autorities.');
               }
 
@@ -247,6 +263,7 @@
               let outTime=getInt(new Date().getTime());
               if(obj.lastIn=="")
               {
+                 showSnack('you are not allowed since you havent verified from entry gate meet autorities.');
                  console.log("meet autorities");
               }
 
@@ -266,6 +283,16 @@
 
         }
 
+        function showSnack(msg)
+        {
+               var data = {
+                     message:msg,
+                     timeout: 2000,
+                     actionHandler: handler,
+                     actionText: 'Message'
+               };
+               snackbarContainer.MaterialSnackbar.showSnackbar(data);
+            }
 
 
       </script>
