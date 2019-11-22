@@ -79,8 +79,11 @@
                                     font-size: 22px;position: absolute;top: 40%;right: 40px; 
                                    font-weight: bold;" id="dateTime">Date & Time</p>
                                    <p style="color: black;
-                                   font-size: 22px;position: absolute;top: 55%;right: 42%;text-align: center; 
+                                   font-size: 22px;position: absolute;top: 55%;right: 40%;text-align: center; 
                                   font-weight: bold;">Exit Gate Number</p>
+                                  <p style="color: black;
+                                  font-size: 22px;position: absolute;top: 60%;right: 50%;text-align: center; 
+                                 font-weight: bold;" id="gateID">1</p>
                                  </div>
                                  <div class="mdl-card__actions mdl-card--border">
                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" 
@@ -90,7 +93,7 @@
                                    </a>
                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" 
                                     style="color: green;font-weight: bold; font-size: 20px;top: 91%; right: 10px;position: absolute;"
-                                    >
+                                    id="cost">
                                      $ 0.0
                                    </a>
                                    <div class="mdl-layout-spacer"></div>
@@ -145,10 +148,20 @@
            {
               loadData(piyush);
            }
+           else
+           {
+              loadData(none);
+           }
         }
         function loadData(obj)
         {
-           document.getElementById(tokenId).innerHTML=obj.uid;
+           document.getElementById("tokenId").innerHTML=obj.uid;
+           document.getElementById("nameM").innerHTML=obj.name;
+           document.getElementById("dateTime").innerHTML=    new Date().toLocaleString();
+           document.getElementById("fromTo").innerHTML=obj.instn+" ➡ "+obj.outstn;
+           document.getElementById("cost").innerHTML=obj.cost;
+           document.getElementById("gateID").innerHTML=obj.gateID;
+
 
         }
       </script>

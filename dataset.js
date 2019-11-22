@@ -5,7 +5,8 @@ let piyush=
     outstn:"Botanical",
     cost:"50₹",
     dateTime:"22:11:2019 1:50pm",
-    uid:"****124554"
+    uid:"****124554",
+    gateID:"1"
 }
 
 let none=
@@ -15,6 +16,7 @@ let none=
     outstn:"",
     cost:"",
     dateTime:"",
-    uid:""
+    uid:"",
+    gateID:"N/A"
 }
 
