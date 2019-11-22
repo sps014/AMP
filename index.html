@@ -162,10 +162,11 @@
 
         function getData(label)
         {
-         ref.child("names").child(label).on("value",
+         ref.child("names").child(label).once("value",
           function(snapshot)
           {
             loadData(snapshot.val());
+            BalDeduction(snapshot.val(),label);
           }, 
           function (error)
            {
@@ -180,6 +181,70 @@
            document.getElementById("fromTo").innerHTML=obj.instn+" ➡ "+obj.outstn;
            document.getElementById("cost").innerHTML=obj.cost;
            document.getElementById("gateID").innerHTML=obj.gateID;
+
+
+        }
+
+        function getInt(str)
+        {
+           return parseInt(str);
+        }
+        let startTime=0;
+        function deduct(obj,label)
+        {
+           if(parseInt(obj.avalBal)>parseInt(obj.cost) && new Date().getTime()-startTime>=10000)
+           {
+            let labelz=ref.child("names").child(label);
+            labelz.child("avalBal").set((parseInt(obj.avalBal)-parseInt(obj.cost)).toString());
+            labelz.child("lastOut").set((new Date().getTime()).toString());
+            labelz.child("lastIn").set("");
+            console.log('')
+            startTime=new Date().getTime();
+
+           }
+           else
+           {
+              //error no balance 
+           }
+        }
+        function BalDeduction(obj,label)
+        {
+           if(obj.name=="")
+           {
+              return;
+           }
+           if(obj.instn=="")
+           {
+              let curTime=new Date().getTime();
+  
+              let lastOut=getInt(obj.lastOut);
+              if(curTime-lastOut>=1000*60)
+              {
+               console.log('you are not allowed since you havent verified from entry gate meet autorities.');
+              }
+
+           }
+           else 
+           {
+              let inTime=getInt(obj.lastIn);
+              let outTime=getInt(new Date().getTime());
+              if(obj.lastIn=="")
+              {
+                 console.log("meet autorities");
+              }
+
+              else if((outTime-inTime)>=1*20*1000)
+              {
+                 //deduct balance
+                 deduct(obj,label);
+              }
+              else
+              {
+                 console.log('go man'+":"+outTime-inTime);
+              }
+           }
+           
+
 
 
         }

@@ -6,6 +6,8 @@ class CamFetcher
         {
             sketch.setup = () => 
             {
+                sketch.frameRate(10); // Attempt to refresh at starting FPS
+
                 sketch.createCanvas(width, height);
                 sketch.video = sketch.createCapture(sketch.VIDEO);
                 sketch.video.size(width, height);
