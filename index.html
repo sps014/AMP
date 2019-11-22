@@ -254,6 +254,7 @@
               {
                if(new Date().getTime()-disPTimer>=2000)
                {
+                  snackbarContainer.style.backgroundColor="red";
                   showSnack('you are not allowed since you havent verified from entry gate meet autorities.');
                   disPTimer=new Date().getTime();
                }
@@ -269,6 +270,7 @@
               {
                if(new Date().getTime()-disPTimer>=2000)
                {
+                     snackbarContainer.style.backgroundColor="red";
                      showSnack('meet autorities.');
                      disPTimer=new Date().getTime();
                }
@@ -281,9 +283,9 @@
               }
               else
               {
-                 snackbarContainer.style.background="green";
                  if(new Date().getTime()-disPTimer>=2000)
                  {
+                  snackbarContainer.style.backgroundColor="green";
                   showSnack('You can go out without payment.');
                   disPTimer=new Date().getTime();
                  }
