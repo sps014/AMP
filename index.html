@@ -161,7 +161,7 @@
     var inputType=document.getElementById('checkbox2');
 
 
-        const URL='https://teachablemachine.withgoogle.com/models/Njk7jZzD/';
+        const URL='https://teachablemachine.withgoogle.com/models/RSeSH4H5/';
         //const URL='https://teachablemachine.withgoogle.com/models/wlGPorLq/';
 
         const fet=new CamFetcher(this.innerWidth/2-20,this.innerHeight-140,'vidContainer',getImageFrame);
@@ -249,10 +249,10 @@
            return parseInt(str);
         }
         let startTime=0;
-        let timeDur=6000;
+        let timeDur=5000;
         function deduct(obj,label)
         {
-           if(parseInt(obj.avalBal)>parseInt(obj.cost) && new Date().getTime()-startTime>=10000)
+           if(parseInt(obj.avalBal)>parseInt(obj.cost) && new Date().getTime()-startTime>=timeDur/60)
            {
             let labelz=ref.child("names").child(label);
             labelz.child("avalBal").set((parseInt(obj.avalBal)-parseInt(obj.cost)).toString());
@@ -260,10 +260,7 @@
             labelz.child("lastIn").set("");
             startTime=new Date().getTime();
 
-            while((new Date().getTime()-disPTimer)<=timeDur)
-            {
-               snackbarContainer2.style.backgroundColor="green";
-            }
+            
             snackbarContainer2.style.backgroundColor="green";
 
             showSnack2('Paid Successfully.-> '+obj.cost);
@@ -321,7 +318,7 @@
               }
               else
               {
-                 if(new Date().getTime()-disPTimer>=timeDur)
+                 if(new Date().getTime()-disPTimer>=timeDur/60)
                  {
                   snackbarContainer.style.backgroundColor="green";
                   showSnack('You can go out without payment.');
